@@ -65,7 +65,7 @@ const App = () => {
         .doc(suggestion.id)
         .set({
           title: suggestion.title,
-          votes: 0
+          votes: []
         })
       await db
         .collection('Feedback_Suggestions')
