@@ -1,12 +1,9 @@
 import React from 'react'
-
-const style = {
-  listStyle: 'none'
-}
+import styles from './VotableList.module.css'
 
 const VotableList = ({ children, ...props }) => {
   return (
-    <ul style={style} {...props}>
+    <ul className={styles.list} {...props}>
       {children}
     </ul>
   )
