@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import firebase from './firebaseApp'
+import Roadmap from './Roadmap'
+import { Box, Button, Flex, Text, Heading, Grid } from '@chakra-ui/core'
+import Suggestions from './Suggestions'
+import Votes from './Votes'
 
 const db = firebase.firestore()
 
@@ -9,6 +13,17 @@ const App = () => {
   const [password, setPassword] = useState('')
 
   const [suggestions, setSuggestions] = useState([])
+  const [votes, setVotes] = useState([])
+
+  const [roadmap, setRoadmap] = useState([])
+  const fetchRoadmap = async () => {
+    try {
+      const roadmapDoc = await db.collection('Feedback_Roadmap').get()
+      setRoadmap(roadmapDoc.docs.map(doc => ({ ...doc.data(), id: doc.id })))
+    } catch (error) {
+      console.log('Fetch roadmap error: ', error)
+    }
+  }
 
   const setupAuthListener = () => {
     return firebase.auth().onAuthStateChanged(signedInUser => {
@@ -29,6 +44,16 @@ const App = () => {
       const querySnapshot = await db.collection('Feedback_Suggestions').get()
       console.log(querySnapshot.docs)
       setSuggestions(querySnapshot.docs.map(suggestion => ({ ...suggestion.data(), id: suggestion.id })))
+    } catch (error) {
+      console.log('Fetch error: ', error)
+    }
+  }
+
+  const fetchVotes = async () => {
+    try {
+      const querySnapshot = await db.collection('Feedback_Votable').get()
+      console.log(querySnapshot.docs)
+      setVotes(querySnapshot.docs.map(votable => ({ ...votable.data(), id: votable.id })))
     } catch (error) {
       console.log('Fetch error: ', error)
     }
@@ -58,38 +83,28 @@ const App = () => {
     }
   }, [])
 
-  const approveSuggestion = async suggestion => {
-    try {
-      await db
-        .collection('Feedback_Votable')
-        .doc(suggestion.id)
-        .set({
-          title: suggestion.title,
-          votes: []
-        })
-      await db
-        .collection('Feedback_Suggestions')
-        .doc(suggestion.id)
-        .delete()
-      setSuggestions(suggestions.filter(sug => sug.id !== suggestion.id))
-    } catch (error) {
-      console.log('Approve error: ', error)
-    }
+  const refresh = () => {
+    fetchSuggestions()
+    fetchRoadmap()
+    fetchVotes()
   }
+
+  useEffect(() => {
+    refresh()
+  }, [])
 
   if (user) {
     return (
-      <main>
-        <button onClick={fetchSuggestions}>Refresh</button>
-        <ul>
-          {suggestions.map(suggestion => (
-            <li key={suggestion.id}>
-              {suggestion.title}
-              <button onClick={() => approveSuggestion(suggestion)}>Approve</button>
-            </li>
-          ))}
-        </ul>
-      </main>
+      <>
+        <Button variantColor="blue" onClick={refresh}>
+          Refresh
+        </Button>
+        <Grid templateColumns="1fr 1fr 1fr" gap={4} p={4}>
+          <Suggestions suggestions={suggestions} setSuggestions={setSuggestions} />
+          <Votes votes={votes} setVotes={setVotes} milestones={roadmap} />
+          <Roadmap roadmap={roadmap} />
+        </Grid>
+      </>
     )
   }
 
