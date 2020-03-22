@@ -10,6 +10,7 @@ const Suggestions = ({ suggestions, setSuggestions }) => {
         .doc(suggestion.id)
         .set({
           title: suggestion.title,
+          description: suggestion.description,
           votes: []
         })
       await db

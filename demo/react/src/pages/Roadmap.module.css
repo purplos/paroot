@@ -1,0 +1,182 @@
+.roadmap {
+  width: 100%;
+  overflow: auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.padding {
+  width: calc(100% - 3.5rem);
+  border-left: 2px solid rgba(0, 0, 0, 0.2);
+  height: 2rem;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-right: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.heading:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.date {
+  width: 3rem;
+  font-weight: 600;
+  font-size: 0.5rem;
+  padding: 0.25rem;
+  padding-left: 0.5rem;
+}
+
+.separator {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1rem;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  transform: translateX(1px);
+}
+
+.milestone {
+  height: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.75rem;
+}
+
+.heading p {
+  font-size: 0.75rem;
+  text-align: right;
+  flex: 1 auto;
+}
+
+.heading svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  transform: rotate(90deg);
+}
+
+.container ul {
+  width: calc(100% - 3.5rem);
+  border-left: 2px solid rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  list-style: none;
+}
+
+.container li h2 {
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  max-width: calc(100% - 3rem);
+  margin: 0;
+  flex: 1 auto;
+  margin-bottom: 0.125rem;
+}
+
+.description {
+  width: 100%;
+}
+
+.container li p {
+  font-weight: normal;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Detail view stuff */
+
+.detailContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: white;
+  padding: 2rem;
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+.detailHeader {
+  display: flex;
+  align-items: center;
+}
+
+.detailHeader p {
+  font-size: 0.875rem;
+}
+
+.detailHeader .milestone {
+  margin: 0;
+  margin-right: 0.5rem;
+}
+
+.detailDate {
+  font-size: 0.625rem;
+  opacity: 0.667;
+  margin: 0.5rem 0;
+}
+
+.detailFeature {
+  list-style: none;
+}
+
+.detailFeature li {
+  margin-bottom: 1rem;
+}
+
+.detailFeature h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.detailFeature p {
+  font-size: 0.875rem;
+}
+
+.closeButton {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  color: rgba(47, 128, 237);
+}
+
+.closeButton svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
