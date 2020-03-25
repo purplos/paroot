@@ -1,21 +1,17 @@
 import React from 'react'
+import styled from 'styled-components'
 
-const styles = {
-  list: {
-    listStyle: 'none',
-    paddingLeft: '1.25rem',
-    paddingBottom: '7rem',
-    height: 'calc(100vh - 4rem)',
-    overflow: 'auto'
-  }
-}
+const Ul = styled.ul`
+  list-style: none;
+  padding-left: 1.25rem;
+  padding-bottom: 7rem;
+  height: calc(100vh - 4rem);
+  overflow: auto;
+  background: ${props => props.backgroundColor};
+`
 
 const List = ({ children, ...props }) => {
-  return (
-    <ul style={styles.list} {...props}>
-      {children}
-    </ul>
-  )
+  return <Ul {...props}>{children}</Ul>
 }
 
 export default List

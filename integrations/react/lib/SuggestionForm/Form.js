@@ -9,12 +9,6 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _UpvoteButton = _interopRequireDefault(require("./UpvoteButton"));
-
-var _FeatureTitle = _interopRequireDefault(require("../FeatureTitle"));
-
-var _FeatureDescription = _interopRequireDefault(require("../FeatureDescription"));
-
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 var _hexToRGB = _interopRequireDefault(require("../hexToRGB"));
@@ -37,18 +31,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 0.25rem;\n"]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  border-bottom: 1px solid rgba(", ", 0.16);\n  display: flex;\n  width: 100%;\n  flex-direction: column;\n  padding-right: 1.25rem;\n  padding-bottom: 0.75rem;\n  padding-top: 1rem;\n  background: ", ";\n  color: ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  background: ", ";\n  display: flex;\n  flex-direction: column;\n  padding: 1.25rem;\n  padding-top: 0;\n  position: relative;\n  max-width: 40rem;\n  margin: 0 auto;\n  color: ", ";\n\n  & input,\n  & textarea {\n    width: 100%;\n    padding: 0.75rem;\n    background: rgba(", ", 0.06);\n    border: none;\n    outline: none;\n    margin-bottom: 0.5rem;\n    border-radius: 0.25rem;\n    color: ", ";\n  }\n\n  & textarea {\n    min-height: 8rem;\n  }\n\n  & button {\n    border: none;\n    outline: none;\n    background: transparent;\n    padding: 0.75rem 1rem;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',\n      'Helvetica Neue', sans-serif;\n    font-size: 0.875;\n    border-radius: 0.25rem;\n    font-weight: 500;\n    cursor: pointer;\n    color: ", ";\n  }\n\n  & button:hover,\n  & button:active {\n    background: rgba(", ", 0.12);\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -59,44 +43,64 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Li = _styledComponents["default"].li(_templateObject(), function (props) {
-  return (0, _hexToRGB["default"])(props.textColor);
+var StyledForm = _styledComponents["default"].form(_templateObject(), function (props) {
+  return props.colors.background;
 }, function (props) {
-  return props.backgroundColor;
+  return props.colors.text;
 }, function (props) {
-  return props.textColor;
+  return (0, _hexToRGB["default"])(props.colors.text);
+}, function (props) {
+  return props.colors.text;
+}, function (props) {
+  return props.colors.text;
+}, function (props) {
+  return (0, _hexToRGB["default"])(props.colors.primary);
 });
 
-var Headerbar = _styledComponents["default"].div(_templateObject2());
-
-var ListItem = (0, _react.forwardRef)(function (_ref, ref) {
-  var item = _ref.item,
-      user = _ref.user,
-      onVote = _ref.onVote,
+var Form = function Form(_ref) {
+  var onSubmit = _ref.onSubmit,
       colors = _ref.colors;
 
-  var _useState = (0, _react.useState)(false),
+  var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
-      expandDescription = _useState2[0],
-      setExpand = _useState2[1];
+      title = _useState2[0],
+      setTitle = _useState2[1];
 
-  return /*#__PURE__*/_react["default"].createElement(Li, {
-    ref: ref,
-    textColor: colors.text,
-    backgroundColor: colors.background
-  }, /*#__PURE__*/_react["default"].createElement(Headerbar, null, /*#__PURE__*/_react["default"].createElement(_FeatureTitle["default"], null, item.title), /*#__PURE__*/_react["default"].createElement(_UpvoteButton["default"], {
-    loading: item.loading,
-    votes: item.votes.length,
-    colors: colors,
-    onClick: function onClick() {
-      return onVote(item.id, item.votes);
-    },
-    active: item.votes.includes(user.uid)
-  })), /*#__PURE__*/_react["default"].createElement("div", {
-    onClick: function onClick() {
-      return setExpand(!expandDescription);
+  var _useState3 = (0, _react.useState)(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      description = _useState4[0],
+      setDescription = _useState4[1];
+
+  var handleSubmit = function handleSubmit(event) {
+    event.preventDefault();
+    if (title.length < 1) return;
+    setTitle('');
+    setDescription('');
+    onSubmit(title, description);
+  };
+
+  return /*#__PURE__*/_react["default"].createElement(StyledForm, {
+    onSubmit: handleSubmit,
+    colors: colors
+  }, /*#__PURE__*/_react["default"].createElement("input", {
+    type: "text",
+    placeholder: "Title",
+    value: title,
+    onChange: function onChange(_ref2) {
+      var target = _ref2.target;
+      return setTitle(target.value);
     }
-  }, /*#__PURE__*/_react["default"].createElement(_FeatureDescription["default"], null, item.description)));
-});
-var _default = ListItem;
+  }), /*#__PURE__*/_react["default"].createElement("textarea", {
+    placeholder: "Description",
+    value: description,
+    onChange: function onChange(_ref3) {
+      var target = _ref3.target;
+      return setDescription(target.value);
+    }
+  }), /*#__PURE__*/_react["default"].createElement("button", {
+    type: "submit"
+  }, "Send suggestion"));
+};
+
+var _default = Form;
 exports["default"] = _default;

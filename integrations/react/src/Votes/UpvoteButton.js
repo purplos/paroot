@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import hexToRGB from '../hexToRGB'
 
 const Button = styled.button`
   background: transparent;
@@ -14,10 +15,10 @@ const Button = styled.button`
   line-height: 1;
   height: 2rem;
   min-width: 2rem;
-  color: ${props => (props.active ? '#2f80ed' : 'black')};
+  color: ${props => (props.active ? props.activeColor : props.textColor)};
 
   &:hover {
-    color: rgba(47, 128, 237, 0.87);
+    color: rgba(${props => hexToRGB(props.activeColor)}, 0.87);
   }
 
   &:focus {
@@ -44,7 +45,7 @@ const Spinner = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: #2f80ed;
+    background-color: ${props => props.color};
     opacity: 0.6;
     position: absolute;
     top: 0;
@@ -82,11 +83,18 @@ const Spinner = styled.div`
   }
 `
 
-const UpvoteButton = ({ onClick, active, loading, votes = 0, ...props }) => {
+const UpvoteButton = ({ onClick, active, loading, votes = 0, colors, ...props }) => {
   return (
-    <Button active={active} onClick={onClick} aria-label={active ? 'Unvote' : 'Vote'} {...props}>
+    <Button
+      active={active}
+      activeColor={colors.primary}
+      textColor={colors.text}
+      onClick={onClick}
+      aria-label={active ? 'Unvote' : 'Vote'}
+      {...props}
+    >
       {loading ? (
-        <Spinner />
+        <Spinner color={colors.primary} />
       ) : (
         <>
           {votes}

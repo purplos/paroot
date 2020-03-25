@@ -2,8 +2,19 @@ import React, { useState, useEffect } from 'react'
 import FirebaseManager from '../FirebaseManager'
 import List from './List'
 import ListItem from './ListItem'
+import defaultConfig from '../defaultConfig'
+import FlipMove from 'react-flip-move'
 
-const Votes = ({ db, auth, config }) => {
+const Votes = ({
+  db,
+  auth,
+  config: userConfig = {},
+  bgColor: background = defaultConfig.colors.background,
+  textColor: text = defaultConfig.colors.text,
+  primaryColor: primary = defaultConfig.colors.primary
+}) => {
+  const config = { ...defaultConfig, ...userConfig }
+  const colors = { background, text, primary }
   const manager = new FirebaseManager(db, auth, config)
   const [votes, setVotes] = useState([])
   const [user, setUser] = useState(null)
@@ -43,10 +54,12 @@ const Votes = ({ db, auth, config }) => {
   if (!user) return 'Loading user...'
 
   return (
-    <List>
-      {sorted.map(item => (
-        <ListItem key={item.id} item={item} manager={manager} user={user} onVote={handleVote} />
-      ))}
+    <List backgroundColor={colors.background}>
+      <FlipMove>
+        {sorted.map(item => (
+          <ListItem key={item.id} item={item} manager={manager} user={user} colors={colors} onVote={handleVote} />
+        ))}
+      </FlipMove>
     </List>
   )
 }

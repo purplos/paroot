@@ -227,6 +227,13 @@ var FirebaseManager = function FirebaseManager(db, auth, config) {
     }());
   });
 
+  _defineProperty(this, "handleSuggestionForm", function (title, description) {
+    _this.db.collection("".concat(_this.config.name, "_suggestions")).add({
+      title: title,
+      description: description
+    });
+  });
+
   this.db = db;
   this.auth = auth;
   this.config = config;

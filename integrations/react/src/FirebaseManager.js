@@ -87,6 +87,13 @@ class FirebaseManager {
       }
     })
   }
+
+  handleSuggestionForm = (title, description) => {
+    this.db.collection(`${this.config.name}_suggestions`).add({
+      title,
+      description
+    })
+  }
 }
 
 export default FirebaseManager
