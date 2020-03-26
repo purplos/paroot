@@ -16,7 +16,13 @@ Initialize Firebase inside your project. Skip if it's already done.
 $ firebase init firestore
 ```
 
-Copy the content of [this page](https://raw.githubusercontent.com/purplos/paroot/develop/setup/firestore.rules.partial) inside your `firestore.rules` file.
+_If you get an error like: "Cloud resource location is not set for this project but the operation you are attempting to perform in Cloud Firestore requires it". Go to your project in Firebase Console, go to Database and click Create database. Follow the instructions._
+
+Copy the content of [this page](https://raw.githubusercontent.com/purplos/paroot/develop/setup/firestore.rules.partial) inside your `firestore.rules` file. Add it inside the scope of `match /databases/{database}/documents`
+
+```bash
+$ firebase deploy --only firestore:rules
+```
 
 Download the setup script
 
