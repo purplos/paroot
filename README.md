@@ -6,21 +6,29 @@
 
 Install Firebase CLI if you don't have it installed already
 
-`curl -sL firebase.tools | bash`
+```bash
+$ curl -sL firebase.tools | bash
+```
 
 Initialize Firebase inside your project. Skip if it's already done.
 
-`firebase init firestore`
+```bash
+$ firebase init firestore
+```
 
 Copy the content of [this page](https://raw.githubusercontent.com/purplos/paroot/develop/setup/firestore.rules.partial) inside your `firestore.rules` file.
 
 Download the setup script
 
-`curl -o setup.js https://raw.githubusercontent.com/purplos/paroot/develop/setup/setup.js`
+```bash
+$ curl -o setup.js https://raw.githubusercontent.com/purplos/paroot/develop/setup/setup.js
+```
 
 Install firebase admin package
 
-`npm install --save-dev firebase-admin`
+```bash
+$ npm install --save-dev firebase-admin
+```
 
 Download service account json from Firebase
 To generate a private key file for your service account:
@@ -34,7 +42,10 @@ To generate a private key file for your service account:
 OBS! Make sure the `serviceAccount.json` is never checked in to git. Once the setup is complete, you can delete the file again.
 
 Run setup script
-`node setup.js`
+
+```bash
+$ node setup.js
+```
 
 ## Development setup
 
