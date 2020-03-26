@@ -20,6 +20,8 @@ _If you get an error like: "Cloud resource location is not set for this project 
 
 Copy the content of [this page](https://raw.githubusercontent.com/purplos/paroot/develop/setup/firestore.rules.partial) inside your `firestore.rules` file. Add it inside the scope of `match /databases/{database}/documents`
 
+Once you've have added the rules, deploy the changes using Firebase CLI
+
 ```bash
 $ firebase deploy --only firestore:rules
 ```
