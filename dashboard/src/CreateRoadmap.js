@@ -8,7 +8,7 @@ const CreateRoadmap = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    db.collection('Feedback_Roadmap').add({
+    db.collection('paroot_milestones').add({
       milestone: version,
       date: new Date(date),
       features: [],

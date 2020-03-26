@@ -1,0 +1,40 @@
+function isOnlyUpdatingVotes() {
+  return request.resource.data.diff(resource.data).affectedKeys().hasOnly(["votes"])
+}
+
+function isOnlyManipulatingOwnVote() {
+  return request.resource.data.get("votes", []).size() > resource.data.get("votes", []).size() ? isOneMore(request.resource.data.get("votes", []), resource.data.get("votes", [])) : isOneLess(request.resource.data.get("votes", []), resource.data.get("votes", []))
+}
+
+function isOneMore(newVotes, oldVotes) {
+  return ((newVotes.size() - oldVotes.size()) == 1) && newVotes.hasAll([request.auth.uid]) && !oldVotes.hasAny([request.auth.uid])
+}
+
+function isOneLess(newVotes, oldVotes) {
+  return ((oldVotes.size() - newVotes.size()) == 1) && !newVotes.hasAny([request.auth.uid]) && oldVotes.hasAll([request.auth.uid])
+}
+
+function isAdmin() {
+  return exists(/databases/$(database)/documents/paroot_admins/$(request.auth.uid))
+}
+
+match /paroot_votes/{document=**} {
+  allow read: if true
+  allow create: if isAdmin()
+  allow delete: if isAdmin()
+  // If authenticated AND
+  // If new values are equal to the old values, except for the votes
+  // - which should be equal except it should add or remove your ID
+  allow update: if isOnlyUpdatingVotes() && isOnlyManipulatingOwnVote()
+}
+
+
+match /paroot_suggestions/{document=**} {
+    allow read, delete: if isAdmin()
+    allow create: if true
+}
+
+match /paroot_roadmap/{document=**} {
+    allow read: if true
+    allow write: if isAdmin()
+}
