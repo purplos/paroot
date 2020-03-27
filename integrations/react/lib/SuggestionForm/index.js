@@ -9,13 +9,13 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _FirebaseManager = _interopRequireDefault(require("../FirebaseManager"));
-
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _Form = _interopRequireDefault(require("./Form"));
-
 var _defaultConfig = _interopRequireDefault(require("../defaultConfig"));
+
+var _FirebaseManager = _interopRequireDefault(require("../FirebaseManager"));
+
+var _Form = _interopRequireDefault(require("./Form"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -42,7 +42,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  padding: 1.5rem 2rem;\n  padding-bottom: 2rem;\n  background: ", ";\n  box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.06), 0px -2px 4px rgba(0, 0, 0, 0.06);\n  font-size: 0.875rem;\n  font-weight: 600;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  position: relative;\n  cursor: pointer;\n  max-width: 40rem;\n  margin: 0 auto;\n  color: ", ";\n\n  &:hover {\n    color: ", ";\n  }\n\n  & svg {\n    width: 1.5rem;\n    height: 1.5rem;\n  }\n\n  &[data-expanded='true'] svg {\n    transform: rotate(180deg);\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding: 1.5rem 2rem;\n  padding-bottom: 2rem;\n  background: ", ";\n  box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.06), 0px -2px 4px rgba(0, 0, 0, 0.06);\n  font-size: 0.875rem;\n  font-weight: 600;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  position: relative;\n  cursor: pointer;\n  color: ", ";\n\n  &:hover {\n    color: ", ";\n  }\n\n  & svg {\n    width: 1.5rem;\n    height: 1.5rem;\n  }\n\n  &[data-expanded='true'] svg {\n    transform: rotate(180deg);\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;

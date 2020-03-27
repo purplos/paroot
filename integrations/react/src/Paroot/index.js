@@ -1,7 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
+import defaultConfig from '../defaultConfig'
+import Roadmap from '../Roadmap'
+import SuggestionForm from '../SuggestionForm'
+import Votes from '../Votes'
+import Tabs from './Tabs'
 
-const Paroot = () => {
-  return <h1>Paroot</h1>
+const Paroot = ({
+  db,
+  auth,
+  config: userConfig = {},
+  bgColor: background = defaultConfig.colors.background,
+  textColor: text = defaultConfig.colors.text,
+  primaryColor: primary = defaultConfig.colors.primary,
+  ...props
+}) => {
+  const [currentTab, setCurrentTab] = useState('feedback')
+  const componentProps = {
+    db,
+    auth,
+    config: userConfig,
+    bgColor: background,
+    textColor: text,
+    primaryColor: primary
+  }
+
+  const handleTabChange = newTab => {
+    setCurrentTab(newTab)
+  }
+
+  return (
+    <div {...props}>
+      <Tabs currentTab={currentTab} onTabChange={handleTabChange} {...componentProps} />
+      {currentTab === 'feedback' ? (
+        <>
+          <Votes {...componentProps} />
+          <SuggestionForm {...componentProps} />
+        </>
+      ) : (
+        <Roadmap {...componentProps} />
+      )}
+    </div>
+  )
 }
 
 export default Paroot

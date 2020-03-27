@@ -9,15 +9,15 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _UpvoteButton = _interopRequireDefault(require("./UpvoteButton"));
-
-var _FeatureTitle = _interopRequireDefault(require("../FeatureTitle"));
+var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 var _FeatureDescription = _interopRequireDefault(require("../FeatureDescription"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _FeatureTitle = _interopRequireDefault(require("../FeatureTitle"));
 
 var _hexToRGB = _interopRequireDefault(require("../hexToRGB"));
+
+var _UpvoteButton = _interopRequireDefault(require("./UpvoteButton"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 

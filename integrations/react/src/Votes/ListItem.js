@@ -1,9 +1,9 @@
-import React, { useState, forwardRef } from 'react'
-import UpvoteButton from './UpvoteButton'
-import FeatureTitle from '../FeatureTitle'
-import FeatureDescription from '../FeatureDescription'
+import React, { forwardRef, useState } from 'react'
 import styled from 'styled-components'
+import FeatureDescription from '../FeatureDescription'
+import FeatureTitle from '../FeatureTitle'
 import hexToRGB from '../hexToRGB'
+import UpvoteButton from './UpvoteButton'
 
 const Li = styled.li`
   border-bottom: 1px solid rgba(${props => hexToRGB(props.textColor)}, 0.16);

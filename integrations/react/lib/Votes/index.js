@@ -9,15 +9,17 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactFlipMove = _interopRequireDefault(require("react-flip-move"));
+
+var _defaultConfig = _interopRequireDefault(require("../defaultConfig"));
+
 var _FirebaseManager = _interopRequireDefault(require("../FirebaseManager"));
 
 var _List = _interopRequireDefault(require("./List"));
 
 var _ListItem = _interopRequireDefault(require("./ListItem"));
 
-var _defaultConfig = _interopRequireDefault(require("../defaultConfig"));
-
-var _reactFlipMove = _interopRequireDefault(require("react-flip-move"));
+var _Spinner = _interopRequireDefault(require("./Spinner"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -116,10 +118,25 @@ var Votes = function Votes(_ref) {
   var sorted = votes.sort(function (a, b) {
     return b.votes.length - a.votes.length;
   });
-  if (!user) return 'Loading user...';
+  if (!user) return /*#__PURE__*/_react["default"].createElement(_List["default"], {
+    backgroundColor: colors.background
+  }, /*#__PURE__*/_react["default"].createElement(_Spinner["default"], {
+    style: {
+      width: '10em',
+      height: '10em',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate3d(-50%, -50%, 0)'
+    },
+    color: primary
+  }));
   return /*#__PURE__*/_react["default"].createElement(_List["default"], {
     backgroundColor: colors.background
-  }, /*#__PURE__*/_react["default"].createElement(_reactFlipMove["default"], null, sorted.map(function (item) {
+  }, /*#__PURE__*/_react["default"].createElement(_reactFlipMove["default"], {
+    enterAnimation: "fade",
+    leaveAnimation: "fade"
+  }, sorted.map(function (item) {
     return /*#__PURE__*/_react["default"].createElement(_ListItem["default"], {
       key: item.id,
       item: item,

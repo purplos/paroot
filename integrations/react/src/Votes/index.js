@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import FlipMove from 'react-flip-move'
+import defaultConfig from '../defaultConfig'
 import FirebaseManager from '../FirebaseManager'
 import List from './List'
 import ListItem from './ListItem'
-import defaultConfig from '../defaultConfig'
-import FlipMove from 'react-flip-move'
+import Spinner from './Spinner'
 
 const Votes = ({
   db,
@@ -51,11 +52,26 @@ const Votes = ({
 
   const sorted = votes.sort((a, b) => b.votes.length - a.votes.length)
 
-  if (!user) return 'Loading user...'
+  if (!user)
+    return (
+      <List backgroundColor={colors.background}>
+        <Spinner
+          style={{
+            width: '10em',
+            height: '10em',
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate3d(-50%, -50%, 0)'
+          }}
+          color={primary}
+        />
+      </List>
+    )
 
   return (
     <List backgroundColor={colors.background}>
-      <FlipMove>
+      <FlipMove enterAnimation="fade" leaveAnimation="fade">
         {sorted.map(item => (
           <ListItem key={item.id} item={item} manager={manager} user={user} colors={colors} onVote={handleVote} />
         ))}

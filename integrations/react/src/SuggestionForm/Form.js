@@ -9,8 +9,6 @@ const StyledForm = styled.form`
   padding: 1.25rem;
   padding-top: 0;
   position: relative;
-  max-width: 40rem;
-  margin: 0 auto;
   color: ${props => props.colors.text};
 
   & input,
@@ -45,7 +43,7 @@ const StyledForm = styled.form`
 
   & button:hover,
   & button:active {
-    background: rgba(${props => hexToRGB(props.colors.primary)}, 0.12);
+    background: rgba(${props => hexToRGB(props.colors.primary)}, 0.24);
   }
 `
 

@@ -16,7 +16,7 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  list-style: none;\n  padding-left: 1.25rem;\n  padding-bottom: 7rem;\n  height: calc(100vh - 5rem);\n  overflow: auto;\n  background: ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 0.5rem;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -27,16 +27,14 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Ul = _styledComponents["default"].ul(_templateObject(), function (props) {
-  return props.backgroundColor;
-});
+var StyledDate = _styledComponents["default"].div(_templateObject());
 
-var List = function List(_ref) {
+var Date = function Date(_ref) {
   var children = _ref.children,
       props = _objectWithoutProperties(_ref, ["children"]);
 
-  return /*#__PURE__*/_react["default"].createElement(Ul, props, children);
+  return /*#__PURE__*/_react["default"].createElement(StyledDate, props, children);
 };
 
-var _default = List;
+var _default = Date;
 exports["default"] = _default;

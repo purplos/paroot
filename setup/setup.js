@@ -45,7 +45,7 @@ const setup = async () => {
         date: new Date(),
         features: [],
         released: false,
-        visisible: true
+        visible: true
       })
     ]);
     await setupPromises;

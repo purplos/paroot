@@ -94,6 +94,18 @@ class FirebaseManager {
       description
     })
   }
+
+  fetchRoadmap = async () => {
+    try {
+      const roadmapDoc = await this.db
+        .collection(`${this.config.name}_milestones`)
+        .where('visible', '==', true)
+        .get()
+      return roadmapDoc.docs.map(doc => ({ ...doc.data(), id: doc.id }))
+    } catch (error) {
+      console.log('Fetch roadmap error: ', error)
+    }
+  }
 }
 
 export default FirebaseManager

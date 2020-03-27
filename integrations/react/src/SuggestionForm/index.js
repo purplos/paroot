@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import FirebaseManager from '../FirebaseManager'
 import styled from 'styled-components'
-import Form from './Form'
 import defaultConfig from '../defaultConfig'
+import FirebaseManager from '../FirebaseManager'
+import Form from './Form'
 
 const Container = styled.div`
   position: fixed;
@@ -36,8 +36,6 @@ const ExpandableArea = styled.div`
   align-items: center;
   position: relative;
   cursor: pointer;
-  max-width: 40rem;
-  margin: 0 auto;
   color: ${props => props.colors.text};
 
   &:hover {
