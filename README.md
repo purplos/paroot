@@ -4,70 +4,63 @@
 
 ## Installation
 
-Install Firebase CLI if you don't have it installed already
+### Set up Firebase Project
+
+1. Go to the [console](https://console.firebase.google.com/) and create a new project. Follow the instructions.
+
+2. Go the Authentication page and click "Get started". Enable the sign-in method Email/Password.
+
+3. Click the Users tab and click Add user. Fill in your email and password. Once the user is created copy the UID.
+
+4. Go to the Database page and click "Create database". Choose "Start in production mode", click next and select a location for the database. Click "Done" to create your database.
+
+5. Once the database is created, click "Start collection" and fill inn "parrot_admins" as the collection id. Click "Next" and fill inn your UID for the Documeny ID. The document does not need any values. Click "Save".
+
+6. Go to the Rules tab. Replace the contents with the contents of [this file](https://raw.githubusercontent.com/purplos/paroot/develop/setup/firestore.rules). Then press "Publish".
+
+_This is optional. If you want to host your dashboard online, continue following the steps._
+
+7. Clone this project and enter the folder.
 
 ```bash
-$ curl -sL firebase.tools | bash
+git clone https://github.com/purplos/paroot.git <folder name>
 ```
-
-Initialize Firebase inside your project. Skip if it's already done.
 
 ```bash
-$ firebase init firestore
+cd <folder name>/dashboard
 ```
 
-_If you get an error like: "Cloud resource location is not set for this project but the operation you are attempting to perform in Cloud Firestore requires it". Go to your project in Firebase Console, go to Database and click Create database. Follow the instructions._
+8. Go the Hosting page and press "Get started" and follow the instructions. When initializing firebase, use "build" as the public folder. Dont run `firebase deploy` yet.
 
-Copy the content of [this page](https://raw.githubusercontent.com/purplos/paroot/develop/setup/firestore.rules.partial) inside your `firestore.rules` file. Add it inside the scope of `match /databases/{database}/documents`
+9. Go Project Settings -> General, and add a new web app. Choose any nickname. Don't check firebase hosting. Press "Next" and copy the `firebaseConfig` object.
 
-Once you've have added the rules, deploy the changes using Firebase CLI
+10. Open `src/firebaseApp.js` and fill in the config for your Firebase App.
+
+11. Go to your terminal and run the following commands.
 
 ```bash
-$ firebase deploy --only firestore:rules
+npm install
 ```
-
-Download the setup script
 
 ```bash
-$ curl -o setup.js https://raw.githubusercontent.com/purplos/paroot/develop/setup/setup.js
+npm run build
 ```
-
-Install firebase admin package
 
 ```bash
-$ npm install --save-dev firebase-admin
+firebase deploy
 ```
 
-Download service account json from Firebase
-To generate a private key file for your service account:
+### Integrate paroot in your project
 
-1. In the Firebase console, open Settings > Service Accounts.
+Select your platform and follow the instructions
 
-2. Click Generate New Private Key, then confirm by clicking Generate Key.
-
-3. Save the JSON file in the same folder, and name it `serviceAccount.json`.
-
-OBS! Make sure the `serviceAccount.json` is never checked in to git. Once the setup is complete, you can delete the file again.
-
-Run setup script
-
-```bash
-$ node setup.js
-```
+- [React](https://www.npmjs.com/package/paroot-react)
 
 ## Development setup
 
 Clone this project and cd into setup, and then follow the instructions above. You don't need to download the setup file, as it's already in the repo.
 
-If you want to run the demo project, you have to add your own `.env` file. You can just copy and rename the `.env.example`.
-
-To find the values needed in the env file:
-
-1. Open Firebase Console and go to Settings > Project settings
-
-2. Scroll down and click `Add app`, select web and type in any name.
-
-3. The values will be displayed in step 2. If you need to find the values again later, just go to Project Settings, find the app you created and select `config`.
+If you want to run the demo project, add the firebaseConfig like you did for the dashboard.
 
 ## Meta
 

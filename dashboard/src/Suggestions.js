@@ -1,12 +1,14 @@
+import { Box, Flex, Heading, IconButton, Text, useToast } from '@chakra-ui/core'
 import React from 'react'
+import DeleteWrapper from './DeleteWrapper'
 import { db } from './firebaseApp'
-import { Text, Button, Heading, Flex, Box } from '@chakra-ui/core'
 
-const Suggestions = ({ suggestions, setSuggestions }) => {
+const Suggestions = ({ suggestions, setSuggestions, refresh }) => {
+  const toast = useToast()
   const approveSuggestion = async suggestion => {
     try {
       await db
-        .collection('Feedback_Votable')
+        .collection(`paroot_votes`)
         .doc(suggestion.id)
         .set({
           title: suggestion.title,
@@ -14,29 +16,55 @@ const Suggestions = ({ suggestions, setSuggestions }) => {
           votes: []
         })
       await db
-        .collection('Feedback_Suggestions')
+        .collection(`paroot_suggestions`)
         .doc(suggestion.id)
         .delete()
-      setSuggestions(suggestions.filter(sug => sug.id !== suggestion.id))
+      refresh()
+      toast({
+        title: 'Suggestion approved',
+        description: `Suggestion titled "${suggestion.title}" has been approved, and can now be voted on.`,
+        status: 'success',
+        position: 'top-right'
+      })
     } catch (error) {
-      console.log('Approve error: ', error)
+      refresh()
+      toast({
+        title: 'Something went wrong',
+        description: `Something went wrong when trying to approve suggestion titled "${suggestion.title}".`,
+        status: 'error',
+        position: 'top-right'
+      })
     }
   }
 
   const deleteSuggestion = async suggestion => {
     try {
       await db
-        .collection('Feedback_Suggestions')
+        .collection(`paroot_suggestions`)
         .doc(suggestion.id)
         .delete()
-      setSuggestions(suggestions.filter(sug => sug.id !== suggestion.id))
+      refresh()
+      toast({
+        title: 'Suggestion deleted',
+        description: `Suggestion titled "${suggestion.title}" has been deleted.`,
+        status: 'success',
+        position: 'top-right'
+      })
     } catch (error) {
-      console.log('Approve error: ', error)
+      refresh()
+      toast({
+        title: 'Something went wrong',
+        description: `Something went wrong when trying to delete suggestion titled "${suggestion.title}".`,
+        status: 'error',
+        position: 'top-right'
+      })
     }
   }
   return (
     <Box>
-      <Heading mb={2}>Suggestions</Heading>
+      <Heading size="lg" mb={2}>
+        Suggestions
+      </Heading>
       {suggestions.length > 0 ? (
         <>
           {suggestions.map(suggestion => (
@@ -45,17 +73,23 @@ const Suggestions = ({ suggestions, setSuggestions }) => {
               align="center"
               borderBottom="1px solid #eee"
               bg="white"
-              p={2}
+              p={4}
               key={suggestion.id}
             >
-              <Heading size="lg">{suggestion.title}</Heading>
+              <Flex flexDir="column">
+                <Heading size="md">{suggestion.title}</Heading>
+                <Text fontSize="md">{suggestion.description}</Text>
+              </Flex>
               <div className="buttons">
-                <Button variantColor="green" mr={2} onClick={() => approveSuggestion(suggestion)}>
-                  Approve
-                </Button>
-                <Button variant="outline" variantColor="red" onClick={() => deleteSuggestion(suggestion)}>
-                  Delete
-                </Button>
+                <IconButton
+                  variantColor="green"
+                  icon="check"
+                  mr={2}
+                  onClick={() => approveSuggestion(suggestion)}
+                ></IconButton>
+                <DeleteWrapper onConfirm={() => deleteSuggestion(suggestion)}>
+                  <IconButton variant="ghost" icon="delete" variantColor="red"></IconButton>
+                </DeleteWrapper>
               </div>
             </Flex>
           ))}

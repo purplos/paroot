@@ -1,23 +1,51 @@
+import { Box, Button, FormLabel, Input, useToast } from '@chakra-ui/core'
 import React, { useState } from 'react'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import { db } from './firebaseApp'
-import { FormControl, FormLabel, Input, Button, Box } from '@chakra-ui/core'
 
-const CreateRoadmap = () => {
+const CreateRoadmap = ({ refresh }) => {
   const [version, setVersion] = useState('')
-  const [date, setDate] = useState()
+  const [date, setDate] = useState(new Date())
 
-  const handleSubmit = event => {
+  const toast = useToast()
+
+  const handleSubmit = async event => {
     event.preventDefault()
-    db.collection('paroot_milestones').add({
-      milestone: version,
-      date: new Date(date),
-      features: [],
-      released: false,
-      visible: false
-    })
+    try {
+      await db.collection('paroot_milestones').add({
+        version,
+        date: new Date(date),
+        features: [],
+        released: false,
+        visible: false
+      })
+      refresh()
+      toast({
+        title: 'Milestone created',
+        description: `Milestone version "${version}" has been created.`,
+        status: 'success',
+        position: 'top-right'
+      })
+    } catch (error) {
+      refresh()
+      toast({
+        title: 'Something went wrong',
+        description: `Could not create milestone version "${version}".`,
+        status: 'error',
+        position: 'top-right'
+      })
+    }
   }
   return (
-    <Box as="form" p={2} bg="white" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
+    <Box
+      as="form"
+      p={4}
+      borderBottom="1px solid #eee"
+      bg="white"
+      onSubmit={handleSubmit}
+      style={{ display: 'flex', flexDirection: 'column' }}
+    >
       <FormLabel htmlFor="version">Version milestone</FormLabel>
       <Input
         type="text"
@@ -29,7 +57,7 @@ const CreateRoadmap = () => {
       />
 
       <FormLabel htmlFor="date">Release date</FormLabel>
-      <Input mb={2} type="date" name="date" id="date" value={date} onInput={({ target }) => setDate(target.value)} />
+      <Input mb={2} as={DatePicker} selected={date} onChange={date => setDate(date)} />
       <Button type="submit">Create milestone</Button>
     </Box>
   )

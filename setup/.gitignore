@@ -70,5 +70,4 @@ serviceAccount.json
 .firebaserc
 firebase.json
 firestore.indexes.json
-firestore.rules
 package-lock.json
