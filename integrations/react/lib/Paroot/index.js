@@ -46,15 +46,13 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 var Paroot = function Paroot(_ref) {
   var db = _ref.db,
       auth = _ref.auth,
-      _ref$config = _ref.config,
-      userConfig = _ref$config === void 0 ? {} : _ref$config,
       _ref$bgColor = _ref.bgColor,
       background = _ref$bgColor === void 0 ? _defaultConfig["default"].colors.background : _ref$bgColor,
       _ref$textColor = _ref.textColor,
       text = _ref$textColor === void 0 ? _defaultConfig["default"].colors.text : _ref$textColor,
       _ref$primaryColor = _ref.primaryColor,
       primary = _ref$primaryColor === void 0 ? _defaultConfig["default"].colors.primary : _ref$primaryColor,
-      props = _objectWithoutProperties(_ref, ["db", "auth", "config", "bgColor", "textColor", "primaryColor"]);
+      props = _objectWithoutProperties(_ref, ["db", "auth", "bgColor", "textColor", "primaryColor"]);
 
   var _useState = (0, _react.useState)('feedback'),
       _useState2 = _slicedToArray(_useState, 2),
@@ -64,7 +62,6 @@ var Paroot = function Paroot(_ref) {
   var componentProps = {
     db: db,
     auth: auth,
-    config: userConfig,
     bgColor: background,
     textColor: text,
     primaryColor: primary

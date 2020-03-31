@@ -35,12 +35,6 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _templateObject3() {
   var data = _taggedTemplateLiteral(["\n  padding: 1.5rem 2rem;\n  padding-bottom: 2rem;\n  background: ", ";\n  box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.06), 0px -2px 4px rgba(0, 0, 0, 0.06);\n  font-size: 0.875rem;\n  font-weight: 600;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  position: relative;\n  cursor: pointer;\n  color: ", ";\n\n  &:hover {\n    color: ", ";\n  }\n\n  & svg {\n    width: 1.5rem;\n    height: 1.5rem;\n  }\n\n  &[data-expanded='true'] svg {\n    transform: rotate(180deg);\n  }\n"]);
 
@@ -92,23 +86,18 @@ var ExpandableArea = _styledComponents["default"].div(_templateObject3(), functi
 var SuggestionForm = function SuggestionForm(_ref) {
   var db = _ref.db,
       auth = _ref.auth,
-      _ref$config = _ref.config,
-      userConfig = _ref$config === void 0 ? {} : _ref$config,
       _ref$bgColor = _ref.bgColor,
       background = _ref$bgColor === void 0 ? _defaultConfig["default"].colors.background : _ref$bgColor,
       _ref$textColor = _ref.textColor,
       text = _ref$textColor === void 0 ? _defaultConfig["default"].colors.text : _ref$textColor,
       _ref$primaryColor = _ref.primaryColor,
       primary = _ref$primaryColor === void 0 ? _defaultConfig["default"].colors.primary : _ref$primaryColor;
-
-  var config = _objectSpread({}, _defaultConfig["default"], {}, userConfig);
-
   var colors = {
     background: background,
     text: text,
     primary: primary
   };
-  var manager = new _FirebaseManager["default"](db, auth, config);
+  var manager = new _FirebaseManager["default"](db, auth);
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),

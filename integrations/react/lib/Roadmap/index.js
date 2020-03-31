@@ -43,12 +43,6 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _templateObject() {
   var data = _taggedTemplateLiteral(["\n  width: 100%;\n  overflow: auto;\n  height: 100vh;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: flex-end;\n  background: ", ";\n\n  .padding {\n    width: calc(100% - 3.5rem);\n    border-left: 2px solid rgba(", ", 0.2);\n    height: 2rem;\n  }\n"]);
 
@@ -70,18 +64,13 @@ var Container = _styledComponents["default"].div(_templateObject(), function (pr
 var Roadmap = function Roadmap(_ref) {
   var db = _ref.db,
       auth = _ref.auth,
-      _ref$config = _ref.config,
-      userConfig = _ref$config === void 0 ? {} : _ref$config,
       _ref$bgColor = _ref.bgColor,
       background = _ref$bgColor === void 0 ? _defaultConfig["default"].colors.background : _ref$bgColor,
       _ref$textColor = _ref.textColor,
       text = _ref$textColor === void 0 ? _defaultConfig["default"].colors.text : _ref$textColor,
       _ref$primaryColor = _ref.primaryColor,
       primary = _ref$primaryColor === void 0 ? _defaultConfig["default"].colors.primary : _ref$primaryColor;
-
-  var config = _objectSpread({}, _defaultConfig["default"], {}, userConfig);
-
-  var manager = new _FirebaseManager["default"](db, auth, config);
+  var manager = new _FirebaseManager["default"](db, auth);
 
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),

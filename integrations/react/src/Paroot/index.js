@@ -8,7 +8,6 @@ import Tabs from './Tabs'
 const Paroot = ({
   db,
   auth,
-  config: userConfig = {},
   bgColor: background = defaultConfig.colors.background,
   textColor: text = defaultConfig.colors.text,
   primaryColor: primary = defaultConfig.colors.primary,
@@ -18,7 +17,6 @@ const Paroot = ({
   const componentProps = {
     db,
     auth,
-    config: userConfig,
     bgColor: background,
     textColor: text,
     primaryColor: primary

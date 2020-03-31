@@ -24,9 +24,6 @@ _This is optional. If you want to host your dashboard online, continue following
 
 ```bash
 git clone https://github.com/purplos/paroot.git <folder name>
-```
-
-```bash
 cd <folder name>/dashboard
 ```
 
@@ -40,13 +37,7 @@ cd <folder name>/dashboard
 
 ```bash
 npm install
-```
-
-```bash
 npm run build
-```
-
-```bash
 firebase deploy
 ```
 

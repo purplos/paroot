@@ -26,13 +26,11 @@ const Container = styled.div`
 const Roadmap = ({
   db,
   auth,
-  config: userConfig = {},
   bgColor: background = defaultConfig.colors.background,
   textColor: text = defaultConfig.colors.text,
   primaryColor: primary = defaultConfig.colors.primary
 }) => {
-  const config = { ...defaultConfig, ...userConfig }
-  const manager = new FirebaseManager(db, auth, config)
+  const manager = new FirebaseManager(db, auth)
   const [roadmap, setRoadmap] = useState([])
   const [showDetail, setShowDetail] = useState(false)
   const [currentMilestone, setCurrentMilestone] = useState(null)

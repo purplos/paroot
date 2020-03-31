@@ -1,8 +1,7 @@
 class FirebaseManager {
-  constructor(db, auth, config) {
+  constructor(db, auth) {
     this.db = db
     this.auth = auth
-    this.config = config
   }
 
   user = null
@@ -27,7 +26,7 @@ class FirebaseManager {
   }
 
   setupRealtimeListener = () => {
-    const votesRef = this.db.collection(`${this.config.name}_votes`)
+    const votesRef = this.db.collection(`paroot_votes`)
     return votesRef.onSnapshot(snapshot => {
       snapshot.docChanges().forEach(change => {
         const doc = change.doc
@@ -68,7 +67,7 @@ class FirebaseManager {
 
   toggleVote = (id, votes, uid) => {
     this.db.runTransaction(async transaction => {
-      const docRef = this.db.collection(`${this.config.name}_votes`).doc(id)
+      const docRef = this.db.collection(`paroot_votes`).doc(id)
       try {
         const latestDoc = await transaction.get(docRef)
         if (!latestDoc.exists) return
@@ -89,7 +88,7 @@ class FirebaseManager {
   }
 
   handleSuggestionForm = (title, description) => {
-    this.db.collection(`${this.config.name}_suggestions`).add({
+    this.db.collection(`paroot_suggestions`).add({
       title,
       description
     })
@@ -98,7 +97,7 @@ class FirebaseManager {
   fetchRoadmap = async () => {
     try {
       const roadmapDoc = await this.db
-        .collection(`${this.config.name}_milestones`)
+        .collection(`paroot_milestones`)
         .where('visible', '==', true)
         .get()
       return roadmapDoc.docs.map(doc => ({ ...doc.data(), id: doc.id }))

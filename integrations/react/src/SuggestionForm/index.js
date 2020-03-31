@@ -55,14 +55,12 @@ const ExpandableArea = styled.div`
 const SuggestionForm = ({
   db,
   auth,
-  config: userConfig = {},
   bgColor: background = defaultConfig.colors.background,
   textColor: text = defaultConfig.colors.text,
   primaryColor: primary = defaultConfig.colors.primary
 }) => {
-  const config = { ...defaultConfig, ...userConfig }
   const colors = { background, text, primary }
-  const manager = new FirebaseManager(db, auth, config)
+  const manager = new FirebaseManager(db, auth)
   const [expanded, setExpanded] = useState(false)
   const handleSubmit = (title, description) => {
     manager.handleSuggestionForm(title, description)

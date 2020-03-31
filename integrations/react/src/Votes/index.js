@@ -9,14 +9,12 @@ import Spinner from './Spinner'
 const Votes = ({
   db,
   auth,
-  config: userConfig = {},
   bgColor: background = defaultConfig.colors.background,
   textColor: text = defaultConfig.colors.text,
   primaryColor: primary = defaultConfig.colors.primary
 }) => {
-  const config = { ...defaultConfig, ...userConfig }
   const colors = { background, text, primary }
-  const manager = new FirebaseManager(db, auth, config)
+  const manager = new FirebaseManager(db, auth)
   const [votes, setVotes] = useState([])
   const [user, setUser] = useState(null)
 

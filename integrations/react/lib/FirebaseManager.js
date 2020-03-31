@@ -29,7 +29,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var FirebaseManager = function FirebaseManager(db, auth, config) {
+var FirebaseManager = function FirebaseManager(db, auth) {
   var _this = this;
 
   _classCallCheck(this, FirebaseManager);
@@ -77,7 +77,7 @@ var FirebaseManager = function FirebaseManager(db, auth, config) {
   })));
 
   _defineProperty(this, "setupRealtimeListener", function () {
-    var votesRef = _this.db.collection("".concat(_this.config.name, "_votes"));
+    var votesRef = _this.db.collection("paroot_votes");
 
     return votesRef.onSnapshot(function (snapshot) {
       snapshot.docChanges().forEach(function (change) {
@@ -150,7 +150,7 @@ var FirebaseManager = function FirebaseManager(db, auth, config) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                docRef = _this.db.collection("".concat(_this.config.name, "_votes")).doc(id);
+                docRef = _this.db.collection("paroot_votes").doc(id);
                 _context3.prev = 1;
                 _context3.next = 4;
                 return transaction.get(docRef);
@@ -228,7 +228,7 @@ var FirebaseManager = function FirebaseManager(db, auth, config) {
   });
 
   _defineProperty(this, "handleSuggestionForm", function (title, description) {
-    _this.db.collection("".concat(_this.config.name, "_suggestions")).add({
+    _this.db.collection("paroot_suggestions").add({
       title: title,
       description: description
     });
@@ -242,7 +242,7 @@ var FirebaseManager = function FirebaseManager(db, auth, config) {
           case 0:
             _context4.prev = 0;
             _context4.next = 3;
-            return _this.db.collection("".concat(_this.config.name, "_milestones")).where('visible', '==', true).get();
+            return _this.db.collection("paroot_milestones").where('visible', '==', true).get();
 
           case 3:
             roadmapDoc = _context4.sent;
@@ -267,7 +267,6 @@ var FirebaseManager = function FirebaseManager(db, auth, config) {
 
   this.db = db;
   this.auth = auth;
-  this.config = config;
 };
 
 var _default = FirebaseManager;
