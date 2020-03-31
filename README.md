@@ -14,7 +14,7 @@
 
 4. Go to the Database page and click "Create database". Choose "Start in production mode", click next and select a location for the database. Click "Done" to create your database.
 
-5. Once the database is created, click "Start collection" and fill inn "parrot_admins" as the collection id. Click "Next" and fill inn your UID for the Documeny ID. The document does not need any values. Click "Save".
+5. Once the database is created, click "Start collection" and fill in "parrot_admins" as the collection id. Click "Next" and fill in your UID for the Documeny ID. The document does not need any values. Click "Save".
 
 6. Go to the Rules tab. Replace the contents with the contents of [this file](https://raw.githubusercontent.com/purplos/paroot/develop/setup/firestore.rules). Then press "Publish".
 
