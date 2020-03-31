@@ -1,4 +1,4 @@
-# Paroot (WIP DO NOT USE YET)
+# Paroot (Not stable. Breaking changes may happen.)
 
 > A open source product feedback tool
 
