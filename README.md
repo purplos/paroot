@@ -58,7 +58,7 @@ Select your platform and follow the instructions
 
 ## Development setup
 
-Clone this project and cd into setup, and then follow the instructions above. You don't need to download the setup file, as it's already in the repo.
+Follow the installation instructions above.
 
 If you want to run the demo project, add the firebaseConfig like you did for the dashboard.
 
